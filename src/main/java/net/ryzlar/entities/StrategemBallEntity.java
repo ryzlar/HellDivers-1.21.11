@@ -1,0 +1,69 @@
+package net.ryzlar.entities;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.ryzlar.items.ModItems;
+import net.ryzlar.laser.BeamData;
+import net.ryzlar.network.BeamPacketSender;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StrategemBallEntity extends ThrowableProjectile implements ItemSupplier {
+
+    @Override
+    public ItemStack getItem() {
+        return new ItemStack(ModItems.STRATEGEM_BALL);
+    }
+
+    public StrategemBallEntity(Level level, Player player) {
+        super(ModEntities.STRATAGEM_BALL, player.getX(), player.getEyeY() - 0.1, player.getZ(), level);
+        this.setOwner(player);
+    }
+
+
+    @Override
+    protected void onHitBlock(BlockHitResult result) {
+        super.onHitBlock(result);
+        if (level().isClientSide()) return;
+
+        BlockPos pos = result.getBlockPos();
+        int color = 0xff3333;
+        int height = 300;
+
+        BeamData beam = BeamData.calculateBeam(pos, color, height, 0.5f);
+        List<BeamData> beams = new ArrayList<>();
+        beams.add(beam);
+
+        level().players().forEach(player -> {
+            if (player instanceof ServerPlayer serverPlayer) {
+                BeamPacketSender.sendBeamsToClient(serverPlayer, beams);
+            }
+        });
+
+        this.discard();
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
+    }
+
+    @Override
+    protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
+    }
+
+
+
+    public StrategemBallEntity(EntityType<? extends StrategemBallEntity> type, Level level) {
+        super(type, level);
+    }
+}
