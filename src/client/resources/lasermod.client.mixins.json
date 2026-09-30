@@ -3,7 +3,9 @@
 	"package": "net.ryzlar.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"ExampleClientMixin",
+		"GameRendererAccessor",
+		"LevelRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

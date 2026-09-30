@@ -23,12 +23,12 @@ import net.ryzlar.entities.ModEntities;
 import net.ryzlar.gui.StrategemUI;
 import net.ryzlar.items.effects.StrategemBall;
 import net.ryzlar.keymapping.KeyMappings;
-import net.ryzlar.laser.BeamData;
 import net.ryzlar.network.ClientBeamReceiver;
 import net.ryzlar.network.StrategemBallThrowPayload;
 import net.ryzlar.renderer.LaserRenderer;
 import net.ryzlar.renderer.TrajectoryRenderer;
 import org.joml.Matrix4f;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 import java.security.Key;
@@ -41,7 +41,6 @@ public class LaserModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-        ClientBeamReceiver.registerBeam();
         ClientBeamReceiver.registerArmPiece();
 
         KeyMappings.initialize();
@@ -88,15 +87,11 @@ public class LaserModClient implements ClientModInitializer {
             }
         });
 
-        WorldRenderEvents.END_MAIN.register(context -> {
-            if (context.consumers() == null) return;
-            LaserRenderer.render(
-                    context.matrices(),
-                    context.consumers()
-            );
-        });
 
         EntityRendererRegistry.register(ModEntities.STRATAGEM_BALL, ThrownItemRenderer::new);
+        // Orbital laser is drawn by LaserRenderer in its own render pass, the entity itself is invisible
+        EntityRendererRegistry.register(ModEntities.ORBITAL_LASER, NoopRenderer::new);
+        ClientTickEvents.END_CLIENT_TICK.register(LaserRenderer::tickParticles);
 
 
         WorldRenderEvents.END_MAIN.register(context -> {

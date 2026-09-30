@@ -1,7 +1,7 @@
 package net.ryzlar.entities;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
@@ -10,12 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.ryzlar.items.ModItems;
-import net.ryzlar.laser.BeamData;
-import net.ryzlar.network.BeamPacketSender;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StrategemBallEntity extends ThrowableProjectile implements ItemSupplier {
 
@@ -39,19 +35,11 @@ public class StrategemBallEntity extends ThrowableProjectile implements ItemSupp
         super.onHitBlock(result);
         if (level().isClientSide()) return;
 
-        BlockPos pos = result.getBlockPos();
-        int color = 0xff3333;
-        int height = 300;
-
-        BeamData beam = BeamData.calculateBeam(pos, color, height, 0.5f);
-        List<BeamData> beams = new ArrayList<>();
-        beams.add(beam);
-
-        level().players().forEach(player -> {
-            if (player instanceof ServerPlayer serverPlayer) {
-                BeamPacketSender.sendBeamsToClient(serverPlayer, beams);
-            }
-        });
+        // Beam starts in the block space next to the face that was hit (on top of it for floors)
+        BlockPos base = result.getBlockPos().relative(result.getDirection());
+        OrbitalLaserEntity.spawn((ServerLevel) level(), Vec3.atBottomCenterOf(base),
+                getOwner() != null ? getOwner().getUUID() : null,
+                OrbitalLaserEntity.DEFAULT_COLOR, OrbitalLaserEntity.DEFAULT_DURATION);
 
         this.discard();
     }

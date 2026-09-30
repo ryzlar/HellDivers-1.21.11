@@ -22,6 +22,18 @@ public class ModEntities {
                             Identifier.fromNamespaceAndPath(LaserMod.MOD_ID, "stratagem_ball")))
     );
 
+    public static final EntityType<OrbitalLaserEntity> ORBITAL_LASER = Registry.register(
+            BuiltInRegistries.ENTITY_TYPE,
+            Identifier.fromNamespaceAndPath(LaserMod.MOD_ID, "orbital_laser"),
+            EntityType.Builder.<OrbitalLaserEntity>of(OrbitalLaserEntity::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f)
+                    .fireImmune()
+                    .clientTrackingRange(32)  // beam is visible from far away
+                    .updateInterval(20)       // never moves
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE,
+                            Identifier.fromNamespaceAndPath(LaserMod.MOD_ID, "orbital_laser")))
+    );
+
     public static void initialize() {
     }
 }
