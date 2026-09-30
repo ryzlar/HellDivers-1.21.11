@@ -19,16 +19,20 @@ import java.util.List;
 
 public class StrategemBallEntity extends ThrowableProjectile implements ItemSupplier {
 
-    @Override
-    public ItemStack getItem() {
-        return new ItemStack(ModItems.STRATEGEM_BALL);
-    }
-
     public StrategemBallEntity(Level level, Player player) {
         super(ModEntities.STRATAGEM_BALL, player.getX(), player.getEyeY() - 0.1, player.getZ(), level);
         this.setOwner(player);
     }
 
+    public StrategemBallEntity(EntityType<? extends StrategemBallEntity> type, Level level) {
+        super(type, level);
+    }
+
+    // Drag (0.99 / 0.8 in water) is applied by ThrowableProjectile itself, see StrategemBallPhysics
+    @Override
+    protected double getDefaultGravity() {
+        return StrategemBallPhysics.GRAVITY;
+    }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
@@ -61,9 +65,8 @@ public class StrategemBallEntity extends ThrowableProjectile implements ItemSupp
     protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
     }
 
-
-
-    public StrategemBallEntity(EntityType<? extends StrategemBallEntity> type, Level level) {
-        super(type, level);
+    @Override
+    public ItemStack getItem() {
+        return new ItemStack(ModItems.STRATEGEM_BALL);
     }
 }

@@ -1,50 +1,60 @@
 package net.ryzlar.renderer;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.ryzlar.entities.StrategemBallPhysics;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrajectoryCalc {
 
-    private static final double GRAVITY = 0.06;
-    private static final double DRAG = 0.97;
-    private static final int MAX_STEPS = 80;
+    private static final int MAX_TICKS = 200; // 10 seconds of flight
 
-    public static List<Vec3> calculate(Player player, float power) {
-        List<Vec3> points = new ArrayList<>();
-
-        Vec3 pos = player.getEyePosition().subtract(0, 0.1, 0);
-        Vec3 look = player.getLookAngle().normalize();
-        Vec3 velocity = look.scale(power * 0.6);
-
-        for (int i = 0; i < MAX_STEPS; i++) {
-            points.add(pos);
-
-            pos = pos.add(velocity);
-
-            velocity = new Vec3(
-                    velocity.x * DRAG,
-                    velocity.y * DRAG - GRAVITY,
-                    velocity.z * DRAG
-            );
-
-            // Stop als de bal de grond raakt
-            if (player.level().getBlockState(BlockPos.containing(pos)).isSolid())
-            {
-                BlockPos blockPos = BlockPos.containing(pos);
-                points.add(new Vec3(pos.x, blockPos.getY() + 1.0, pos.z));
-                break;
-            }
-        }
-
-        return points;
+    /**
+     * @param points one point per tick, starting at the spawn position; the last point is the impact point if {@code hit} is set
+     * @param hit    the block the ball will land on, or null if it flies out of range / out of the world
+     */
+    public record Result(List<Vec3> points, @Nullable BlockHitResult hit) {
     }
 
-    public static Vec3 getLandingPos(Player player, float power) {
-        List<Vec3> points = calculate(player, power);
-        return points.isEmpty() ? player.position() : points.get(points.size() - 1);
+    /**
+     * Simulates the ball tick by tick, mirroring ThrowableProjectile.tick():
+     * gravity -> drag -> raycast from old to new position (same COLLIDER clip the entity uses).
+     */
+    public static Result calculate(Player player, float power, float partialTick) {
+        Level level = player.level();
+        List<Vec3> points = new ArrayList<>();
+
+        Vec3 look = player.getViewVector(partialTick);
+        Vec3 pos = StrategemBallPhysics.spawnPos(player.getEyePosition(partialTick), look);
+        Vec3 velocity = StrategemBallPhysics.launchVelocity(look, power);
+        points.add(pos);
+
+        for (int tick = 0; tick < MAX_TICKS; tick++) {
+            boolean inWater = level.getFluidState(BlockPos.containing(pos)).is(FluidTags.WATER);
+            velocity = StrategemBallPhysics.nextVelocity(velocity, inWater);
+
+            Vec3 next = pos.add(velocity);
+            BlockHitResult clip = level.clip(new ClipContext(pos, next, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+            if (clip.getType() != HitResult.Type.MISS) {
+                points.add(clip.getLocation());
+                return new Result(points, clip);
+            }
+
+            pos = next;
+            points.add(pos);
+
+            if (pos.y < level.getMinY() - 16) break;
+        }
+
+        return new Result(points, null);
     }
 }
