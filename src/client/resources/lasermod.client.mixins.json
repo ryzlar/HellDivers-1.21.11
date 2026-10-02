@@ -3,9 +3,13 @@
 	"package": "net.ryzlar.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
+		"CameraMixin",
 		"ExampleClientMixin",
 		"GameRendererAccessor",
-		"LevelRendererMixin"
+		"GameRendererFovMixin",
+		"KeyboardInputMixin",
+		"LevelRendererMixin",
+		"MouseHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

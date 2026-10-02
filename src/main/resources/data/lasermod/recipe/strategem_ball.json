@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "D": "minecraft:diamond",
+    "Q": "minecraft:quartz",
+    "E": "minecraft:ender_eye",
+    "R": "minecraft:redstone_block"
+  },
+  "pattern": [
+    "GDG",
+    "QEQ",
+    "GRG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lasermod:strategem_ball"
+  }
+}

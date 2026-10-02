@@ -34,6 +34,13 @@ fabricApi {
 	configureDataGeneration {
 		client = true
 	}
+	// Dev-only visual tests (src/gametest): ./gradlew runClientGameTest
+	configureTests {
+		createSourceSet = true
+		modId = "lasermod-gametest"
+		enableGameTests = false
+		enableClientGameTests = true
+	}
 }
 
 dependencies {

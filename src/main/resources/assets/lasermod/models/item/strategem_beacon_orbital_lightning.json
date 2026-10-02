@@ -1,0 +1,6 @@
+{
+  "parent": "lasermod:item/strategem_beacon_armed",
+  "textures": {
+    "glyph": "lasermod:item/beacon_glyph_orbital_lightning"
+  }
+}

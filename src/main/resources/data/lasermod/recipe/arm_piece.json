@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "minecraft:diamond",
+    "T": "minecraft:tinted_glass",
+    "C": "minecraft:comparator",
+    "N": "minecraft:netherite_ingot",
+    "R": "minecraft:redstone_block",
+    "E": "minecraft:ender_eye"
+  },
+  "pattern": [
+    "DTD",
+    "CNC",
+    "RER"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lasermod:arm_piece"
+  }
+}

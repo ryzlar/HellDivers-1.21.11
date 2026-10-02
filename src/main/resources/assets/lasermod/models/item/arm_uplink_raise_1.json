@@ -1,0 +1,39 @@
+{
+  "parent": "lasermod:item/arm_uplink_opening",
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        -7.259,
+        1.63,
+        52.074
+      ],
+      "translation": [
+        0.648,
+        4.028,
+        1.426
+      ],
+      "scale": [
+        0.345,
+        0.345,
+        0.345
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -9.259,
+        -1.496,
+        39.667
+      ],
+      "translation": [
+        -0.648,
+        4.528,
+        1.176
+      ],
+      "scale": [
+        0.345,
+        0.345,
+        0.345
+      ]
+    }
+  }
+}

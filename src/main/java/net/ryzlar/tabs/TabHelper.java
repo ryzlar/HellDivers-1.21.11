@@ -11,6 +11,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.ryzlar.LaserMod;
 import net.ryzlar.items.ModItems;
+import net.ryzlar.items.StrategemBallItem;
+import net.ryzlar.strategem.Strategem;
+import net.ryzlar.strategem.Strategems;
 
 public class TabHelper {
 
@@ -24,6 +27,12 @@ public class TabHelper {
 
                 for (Item item: ModItems.ALL_ITEMS) {
                     output.accept(item);
+                }
+                // A pre-programmed ball for every stratagem, handy for testing
+                for (Strategem strategem : Strategems.all()) {
+                    ItemStack ball = new ItemStack(ModItems.STRATEGEM_BALL);
+                    StrategemBallItem.program(ball, strategem);
+                    output.accept(ball);
                 }
 
             })

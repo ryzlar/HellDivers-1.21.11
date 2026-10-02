@@ -1,6 +1,614 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "lasermod:item/strategem_ball"
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "lasermod:strategem",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "lasermod:item/strategem_beacon",
+      "tints": [
+        {
+          "type": "lasermod:ball_core"
+        }
+      ]
+    },
+    "on_true": {
+      "type": "minecraft:select",
+      "property": "minecraft:component",
+      "component": "lasermod:strategem",
+      "cases": [
+        {
+          "when": "lasermod:void_rift",
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "lasermod:program_progress",
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_void_rift",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.01,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_void_rift",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_1",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.34,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_void_rift",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_2",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.67,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_void_rift",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_3",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "when": "lasermod:meteor_strike",
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "lasermod:program_progress",
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_meteor_strike",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.01,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_meteor_strike",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_1",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.34,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_meteor_strike",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_2",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.67,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_meteor_strike",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_3",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "when": "lasermod:orbital_lightning",
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "lasermod:program_progress",
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_orbital_lightning",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.01,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_orbital_lightning",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_1",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.34,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_orbital_lightning",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_2",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.67,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_orbital_lightning",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_3",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "when": "lasermod:volcanic_eruption",
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "lasermod:program_progress",
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_volcanic_eruption",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.01,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_volcanic_eruption",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_1",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.34,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_volcanic_eruption",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_2",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.67,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_volcanic_eruption",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_3",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "when": "lasermod:nuclear_strike",
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "lasermod:program_progress",
+            "entries": [
+              {
+                "threshold": 0.0,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_nuclear_strike",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.01,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_nuclear_strike",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_1",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.34,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_nuclear_strike",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_2",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "threshold": 0.67,
+                "model": {
+                  "type": "minecraft:composite",
+                  "models": [
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/strategem_beacon_nuclear_strike",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "minecraft:model",
+                      "model": "lasermod:item/beacon_scan_3",
+                      "tints": [
+                        {
+                          "type": "lasermod:ball_core"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:range_dispatch",
+        "property": "lasermod:program_progress",
+        "entries": [
+          {
+            "threshold": 0.0,
+            "model": {
+              "type": "minecraft:model",
+              "model": "lasermod:item/strategem_beacon_generic",
+              "tints": [
+                {
+                  "type": "lasermod:ball_core"
+                }
+              ]
+            }
+          },
+          {
+            "threshold": 0.01,
+            "model": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_generic",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/beacon_scan_1",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "threshold": 0.34,
+            "model": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_generic",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/beacon_scan_2",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "threshold": 0.67,
+            "model": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/strategem_beacon_generic",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lasermod:item/beacon_scan_3",
+                  "tints": [
+                    {
+                      "type": "lasermod:ball_core"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
   }
 }

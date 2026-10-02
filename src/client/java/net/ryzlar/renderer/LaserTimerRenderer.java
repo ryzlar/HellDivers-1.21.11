@@ -55,6 +55,18 @@ public class LaserTimerRenderer {
         Vec3 cam = camera.position();
         double anchorY = followLookHeight(laser, cam, camera.forwardVector(), dt);
         Vec3 anchor = new Vec3(laser.getX(), anchorY, laser.getZ());
+        drawPanel(poseStack, bufferSource, camera, anchor, 0.7f, "ORBITAL LASER", remaining / 20.0f,
+                remaining / laser.getDuration(), laser.getColor(), visibility, seconds);
+    }
+
+    /**
+     * The countdown panel itself, reusable by any effect: faces the camera at {@code anchor}, keeps the same
+     * size on screen, sits {@code gapWorld} blocks to the right of the anchor with a connector line.
+     */
+    public static void drawPanel(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, Camera camera,
+                                 Vec3 anchor, float gapWorld, String title, float secondsLeft, float progress,
+                                 int accent, float visibility, float seconds) {
+        Vec3 cam = camera.position();
         float distance = (float) Math.max(2.5, anchor.distanceTo(cam));
         float scale = distance * PIXEL_SCALE;
 
@@ -64,13 +76,11 @@ public class LaserTimerRenderer {
         poseStack.scale(scale, -scale, scale);
 
         // --- layout (pixels, y down); the beam axis is at x = 0
-        int accent = laser.getColor();
-        float secondsLeft = remaining / 20.0f;
         boolean critical = secondsLeft <= CRITICAL_SECONDS;
         float blink = 0.5f + 0.5f * Mth.sin(seconds * Mth.TWO_PI * 2.0f);
         int timeColor = critical ? lerpColor(0xFFFFFF, accent, blink) : 0xFFFFFF;
 
-        float gap = 0.7f / scale; // stay clear of the beam core, whatever the distance
+        float gap = gapWorld / scale; // stay clear of the beam core, whatever the distance
         float x0 = gap + 10;
         float y0 = -PANEL_H / 2.0f;
         float x1 = x0 + PANEL_W;
@@ -101,7 +111,7 @@ public class LaserTimerRenderer {
 
         // Progress bar
         float barX0 = x0 + 8, barX1 = x1 - 8, barY = y1 - 6;
-        float progress = Mth.clamp(remaining / laser.getDuration(), 0.0f, 1.0f);
+        progress = Mth.clamp(progress, 0.0f, 1.0f);
         rect(vc, mat, barX0, barY, barX1, barY + 2, argb(0.18f * visibility, 0xFFFFFF));
         rect(vc, mat, barX0, barY, barX0 + (barX1 - barX0) * progress, barY + 2,
                 argb(visibility, critical ? timeColor : accent));
@@ -110,7 +120,7 @@ public class LaserTimerRenderer {
 
         // --- text
         Font font = Minecraft.getInstance().font;
-        text(font, poseStack, bufferSource, "ORBITAL LASER", x0 + 8, y0 + 6, 0.75f, argb(visibility, lighten(accent)));
+        text(font, poseStack, bufferSource, title, x0 + 8, y0 + 6, 0.75f, argb(visibility, lighten(accent)));
 
         String time = String.format(Locale.ROOT, "%.1f", secondsLeft);
         text(font, poseStack, bufferSource, time, x0 + 8, y0 + 14, 2.0f, argb(visibility, timeColor));

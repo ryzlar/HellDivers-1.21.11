@@ -1,0 +1,15 @@
+{
+	"schemaVersion": 1,
+	"id": "lasermod-gametest",
+	"version": "1.0.0",
+	"name": "LaserMod visual tests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-client-gametest": [
+			"net.ryzlar.gametest.StrikeVisualTest"
+		]
+	},
+	"depends": {
+		"lasermod": "*"
+	}
+}

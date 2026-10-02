@@ -1,0 +1,289 @@
+{
+  "uplink.open": {
+    "subtitle": "subtitles.lasermod.uplink.open",
+    "sounds": [
+      "lasermod:uplink_open"
+    ]
+  },
+  "uplink.close": {
+    "subtitle": "subtitles.lasermod.uplink.close",
+    "sounds": [
+      "lasermod:uplink_close"
+    ]
+  },
+  "uplink.input": {
+    "subtitle": "subtitles.lasermod.uplink.input",
+    "sounds": [
+      "lasermod:input"
+    ]
+  },
+  "uplink.error": {
+    "subtitle": "subtitles.lasermod.uplink.error",
+    "sounds": [
+      "lasermod:input_error"
+    ]
+  },
+  "uplink.page": {
+    "subtitle": "subtitles.lasermod.uplink.page",
+    "sounds": [
+      "lasermod:page"
+    ]
+  },
+  "beacon.program_upload": {
+    "subtitle": "subtitles.lasermod.beacon.program_upload",
+    "sounds": [
+      "lasermod:program_upload"
+    ]
+  },
+  "beacon.program_complete": {
+    "subtitle": "subtitles.lasermod.beacon.program_complete",
+    "sounds": [
+      "lasermod:program_complete"
+    ]
+  },
+  "uplink.ready": {
+    "subtitle": "subtitles.lasermod.uplink.ready",
+    "sounds": [
+      "lasermod:stratagem_ready"
+    ]
+  },
+  "beacon.arm": {
+    "subtitle": "subtitles.lasermod.beacon.arm",
+    "sounds": [
+      "lasermod:beacon_arm"
+    ]
+  },
+  "beacon.land": {
+    "subtitle": "subtitles.lasermod.beacon.land",
+    "sounds": [
+      "lasermod:beacon_land"
+    ]
+  },
+  "strike.rift_warning": {
+    "subtitle": "subtitles.lasermod.strike.rift_warning",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_warning"
+      }
+    ]
+  },
+  "strike.rift_tear": {
+    "subtitle": "subtitles.lasermod.strike.rift_tear",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_tear"
+      }
+    ]
+  },
+  "strike.rift_open": {
+    "subtitle": "subtitles.lasermod.strike.rift_open",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_open"
+      }
+    ]
+  },
+  "strike.rift_loop": {
+    "subtitle": "subtitles.lasermod.strike.rift_loop",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_loop"
+      }
+    ]
+  },
+  "strike.rift_unstable": {
+    "subtitle": "subtitles.lasermod.strike.rift_unstable",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_unstable"
+      }
+    ]
+  },
+  "strike.rift_close": {
+    "subtitle": "subtitles.lasermod.strike.rift_close",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_close"
+      }
+    ]
+  },
+  "strike.rift_snap": {
+    "subtitle": "subtitles.lasermod.strike.rift_snap",
+    "sounds": [
+      {
+        "name": "lasermod:strike/rift_snap"
+      }
+    ]
+  },
+  "strike.meteor_warning": {
+    "subtitle": "subtitles.lasermod.strike.meteor_warning",
+    "sounds": [
+      {
+        "name": "lasermod:strike/meteor_warning"
+      }
+    ]
+  },
+  "strike.meteor_incoming": {
+    "subtitle": "subtitles.lasermod.strike.meteor_incoming",
+    "sounds": [
+      {
+        "name": "lasermod:strike/meteor_incoming"
+      }
+    ]
+  },
+  "strike.meteor_impact": {
+    "subtitle": "subtitles.lasermod.strike.meteor_impact",
+    "sounds": [
+      {
+        "name": "lasermod:strike/meteor_impact"
+      }
+    ]
+  },
+  "strike.debris_rain": {
+    "subtitle": "subtitles.lasermod.strike.debris_rain",
+    "sounds": [
+      {
+        "name": "lasermod:strike/debris_rain"
+      }
+    ]
+  },
+  "strike.lightning_charge": {
+    "subtitle": "subtitles.lasermod.strike.lightning_charge",
+    "sounds": [
+      {
+        "name": "lasermod:strike/lightning_charge"
+      }
+    ]
+  },
+  "strike.lightning_zap": {
+    "subtitle": "subtitles.lasermod.strike.lightning_zap",
+    "sounds": [
+      {
+        "name": "lasermod:strike/lightning_zap"
+      }
+    ]
+  },
+  "strike.lightning_strike": {
+    "subtitle": "subtitles.lasermod.strike.lightning_strike",
+    "sounds": [
+      {
+        "name": "lasermod:strike/lightning_strike"
+      }
+    ]
+  },
+  "strike.lightning_final_charge": {
+    "subtitle": "subtitles.lasermod.strike.lightning_final_charge",
+    "sounds": [
+      {
+        "name": "lasermod:strike/lightning_final_charge"
+      }
+    ]
+  },
+  "strike.lightning_discharge": {
+    "subtitle": "subtitles.lasermod.strike.lightning_discharge",
+    "sounds": [
+      {
+        "name": "lasermod:strike/lightning_discharge"
+      }
+    ]
+  },
+  "strike.lightning_crackle": {
+    "subtitle": "subtitles.lasermod.strike.lightning_crackle",
+    "sounds": [
+      {
+        "name": "lasermod:strike/lightning_crackle"
+      }
+    ]
+  },
+  "strike.volcano_rumble": {
+    "subtitle": "subtitles.lasermod.strike.volcano_rumble",
+    "sounds": [
+      {
+        "name": "lasermod:strike/volcano_rumble"
+      }
+    ]
+  },
+  "strike.volcano_crack": {
+    "subtitle": "subtitles.lasermod.strike.volcano_crack",
+    "sounds": [
+      {
+        "name": "lasermod:strike/volcano_crack"
+      }
+    ]
+  },
+  "strike.volcano_vent": {
+    "subtitle": "subtitles.lasermod.strike.volcano_vent",
+    "sounds": [
+      {
+        "name": "lasermod:strike/volcano_vent"
+      }
+    ]
+  },
+  "strike.volcano_eruption": {
+    "subtitle": "subtitles.lasermod.strike.volcano_eruption",
+    "sounds": [
+      {
+        "name": "lasermod:strike/volcano_eruption",
+        "stream": true
+      }
+    ]
+  },
+  "strike.volcano_burst": {
+    "subtitle": "subtitles.lasermod.strike.volcano_burst",
+    "sounds": [
+      {
+        "name": "lasermod:strike/volcano_burst"
+      }
+    ]
+  },
+  "strike.steam_hiss": {
+    "subtitle": "subtitles.lasermod.strike.steam_hiss",
+    "sounds": [
+      {
+        "name": "lasermod:strike/steam_hiss"
+      }
+    ]
+  },
+  "strike.nuke_alarm": {
+    "subtitle": "subtitles.lasermod.strike.nuke_alarm",
+    "sounds": [
+      {
+        "name": "lasermod:strike/nuke_alarm"
+      }
+    ]
+  },
+  "strike.nuke_charge": {
+    "subtitle": "subtitles.lasermod.strike.nuke_charge",
+    "sounds": [
+      {
+        "name": "lasermod:strike/nuke_charge"
+      }
+    ]
+  },
+  "strike.nuke_detonation": {
+    "subtitle": "subtitles.lasermod.strike.nuke_detonation",
+    "sounds": [
+      {
+        "name": "lasermod:strike/nuke_detonation",
+        "stream": true
+      }
+    ]
+  },
+  "strike.nuke_shockwave": {
+    "subtitle": "subtitles.lasermod.strike.nuke_shockwave",
+    "sounds": [
+      {
+        "name": "lasermod:strike/nuke_shockwave"
+      }
+    ]
+  },
+  "strike.nuke_aftermath": {
+    "subtitle": "subtitles.lasermod.strike.nuke_aftermath",
+    "sounds": [
+      {
+        "name": "lasermod:strike/nuke_aftermath",
+        "stream": true
+      }
+    ]
+  }
+}

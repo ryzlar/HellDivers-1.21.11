@@ -3,25 +3,36 @@ package net.ryzlar.entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.ryzlar.items.ModItems;
+import net.ryzlar.items.StrategemBallItem;
+import net.ryzlar.strategem.Attack;
+import net.ryzlar.strategem.Attacks;
+import net.ryzlar.strategem.Strategem;
 
-public class StrategemBallEntity extends ThrowableProjectile implements ItemSupplier {
+/**
+ * Thrown Strategem Ball. Carries (and syncs) the thrown item stack, so the stratagem it was
+ * programmed with travels with it; on impact that stratagem's attack is executed.
+ */
+public class StrategemBallEntity extends ThrowableItemProjectile {
 
-    public StrategemBallEntity(Level level, Player player) {
-        super(ModEntities.STRATAGEM_BALL, player.getX(), player.getEyeY() - 0.1, player.getZ(), level);
-        this.setOwner(player);
+    public StrategemBallEntity(Level level, Player player, ItemStack ball) {
+        super(ModEntities.STRATAGEM_BALL, player, level, ball);
     }
 
     public StrategemBallEntity(EntityType<? extends StrategemBallEntity> type, Level level) {
         super(type, level);
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        return ModItems.STRATEGEM_BALL;
     }
 
     // Drag (0.99 / 0.8 in water) is applied by ThrowableProjectile itself, see StrategemBallPhysics
@@ -33,13 +44,16 @@ public class StrategemBallEntity extends ThrowableProjectile implements ItemSupp
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        if (level().isClientSide()) return;
+        if (!(level() instanceof ServerLevel serverLevel)) return;
 
-        // Beam starts in the block space next to the face that was hit (on top of it for floors)
-        BlockPos base = result.getBlockPos().relative(result.getDirection());
-        OrbitalLaserEntity.spawn((ServerLevel) level(), Vec3.atBottomCenterOf(base),
-                getOwner() != null ? getOwner().getUUID() : null,
-                OrbitalLaserEntity.DEFAULT_COLOR, OrbitalLaserEntity.DEFAULT_DURATION);
+        Strategem strategem = StrategemBallItem.getStrategem(getItem());
+        if (strategem == null) {
+            Attacks.fizzle(serverLevel, result.getLocation()); // empty ball: nothing happens
+        } else {
+            BlockPos ground = result.getBlockPos().relative(result.getDirection());
+            strategem.attack().execute(new Attack.Context(serverLevel, strategem, result.getLocation(), ground,
+                    result.getDirection(), getOwner()));
+        }
 
         this.discard();
     }
@@ -47,14 +61,5 @@ public class StrategemBallEntity extends ThrowableProjectile implements ItemSupp
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-    }
-
-    @Override
-    protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return new ItemStack(ModItems.STRATEGEM_BALL);
     }
 }

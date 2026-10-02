@@ -10,8 +10,8 @@ public class ModItems {
 
     public static List<Item> ALL_ITEMS = new ArrayList<>();
 
-    public static final Item STRATEGEM_BALL = ItemHelper.register("strategem_ball", StrategemBallItem::new, new Item.Properties());
-    public static final Item ARM_PIECE = ItemHelper.register("arm_piece",Item::new, new Item.Properties());
+    public static final Item STRATEGEM_BALL = ItemHelper.register("strategem_ball", StrategemBallItem::new, new Item.Properties().stacksTo(1));
+    public static final Item ARM_PIECE = ItemHelper.register("arm_piece", Item::new, new Item.Properties().stacksTo(1));
 
 
     public static void initialize() {

@@ -49,7 +49,13 @@ public class LaserRenderer {
         return !LASERS.isEmpty();
     }
 
-    public static void render(MultiBufferSource.BufferSource bufferSource, GpuBufferSlice worldFog) {
+    /** Fog buffer that disables fog; used for UI and for strike effects that must read from far away. */
+    public static GpuBufferSlice noFog() {
+        FogRenderer fogRenderer = ((GameRendererAccessor) Minecraft.getInstance().gameRenderer).lasermod$getFogRenderer();
+        return fogRenderer.getBuffer(FogRenderer.FogMode.NONE);
+    }
+
+    public static void renderWorld(MultiBufferSource.BufferSource bufferSource) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || LASERS.isEmpty()) return;
 
@@ -64,12 +70,16 @@ public class LaserRenderer {
         }
         bufferSource.endBatch(ModRendererTypes.getLaserBeamTranslucent());
         bufferSource.endBatch(ModRendererTypes.getLaserGlow());
+    }
 
-        // The timer is UI: no fog, so it stays readable at any distance
-        FogRenderer fogRenderer = ((GameRendererAccessor) mc.gameRenderer).lasermod$getFogRenderer();
-        RenderSystem.setShaderFog(fogRenderer.getBuffer(FogRenderer.FogMode.NONE));
-        LaserTimerRenderer.render(poseStack, bufferSource, LASERS, camera, partialTick, seconds);
-        RenderSystem.setShaderFog(worldFog);
+    /** Timer panels; call with fog disabled so they stay readable at any distance. */
+    public static void renderUi(MultiBufferSource.BufferSource bufferSource) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null || LASERS.isEmpty()) return;
+        Camera camera = mc.gameRenderer.getMainCamera();
+        float partialTick = mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
+        float seconds = ((mc.level.getGameTime() % 24000L) + partialTick) / 20.0f;
+        LaserTimerRenderer.render(new PoseStack(), bufferSource, LASERS, camera, partialTick, seconds);
     }
 
     // ---------------------------------------------------------------- beam

@@ -27,13 +27,18 @@ public class TrajectoryRenderer {
     private static final float DASH_LENGTH = 0.9f;
     private static final float DASH_SPEED = 4.0f;        // blocks per second, flows towards the target
 
-    // Impact marker, same red as the beam (0xff3333)
-    private static final float MARK_R = 1.0f, MARK_G = 0.2f, MARK_B = 0.2f;
+    // Impact marker color, set per render from the ball's stratagem
+    private static float MARK_R = 1.0f, MARK_G = 0.2f, MARK_B = 0.2f;
     private static final float MARKER_RADIUS = 0.7f;
     private static final float SURFACE_OFFSET = 0.02f;   // avoid z-fighting with the block face
     private static final float PILLAR_HEIGHT = 2.5f;
 
-    public static void render(PoseStack poseStack, MultiBufferSource bufferSource, float power, float partialTick) {
+    public static void render(PoseStack poseStack, MultiBufferSource bufferSource, float power, float partialTick,
+                              int markerColor) {
+        MARK_R = ((markerColor >> 16) & 255) / 255.0f;
+        MARK_G = ((markerColor >> 8) & 255) / 255.0f;
+        MARK_B = (markerColor & 255) / 255.0f;
+
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null) return;

@@ -4,30 +4,123 @@
     "property": "minecraft:display_context",
     "cases": [
       {
-        "when": ["firstperson_righthand", "firstperson_lefthand"],
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand"
+        ],
         "model": {
-          "type": "minecraft:model",
-          "model": "lasermod:item/arm_piece_first"
-        }
-      },
-      {
-        "when": ["thirdperson_righthand", "thirdperson_lefthand"],
-        "model": {
-          "type": "minecraft:model",
-          "model": "lasermod:item/arm_piece_drop"
-        }
-      },
-      {
-        "when": ["ground", "fixed"],
-        "model": {
-          "type": "minecraft:model",
-          "model": "lasermod:item/arm_piece_drop"
+          "type": "minecraft:range_dispatch",
+          "property": "lasermod:menu_raise",
+          "entries": [
+            {
+              "threshold": 0.0,
+              "model": {
+                "type": "minecraft:model",
+                "model": "lasermod:item/arm_uplink",
+                "tints": [
+                  {
+                    "type": "lasermod:arm_screen"
+                  },
+                  {
+                    "type": "lasermod:arm_led"
+                  }
+                ]
+              }
+            },
+            {
+              "threshold": 0.25,
+              "model": {
+                "type": "minecraft:model",
+                "model": "lasermod:item/arm_uplink_raise_1",
+                "tints": [
+                  {
+                    "type": "lasermod:arm_screen"
+                  },
+                  {
+                    "type": "lasermod:arm_led"
+                  }
+                ]
+              }
+            },
+            {
+              "threshold": 0.5,
+              "model": {
+                "type": "minecraft:composite",
+                "models": [
+                  {
+                    "type": "minecraft:model",
+                    "model": "lasermod:item/arm_uplink_raise_2",
+                    "tints": [
+                      {
+                        "type": "lasermod:arm_screen"
+                      },
+                      {
+                        "type": "lasermod:arm_led"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "minecraft:model",
+                    "model": "lasermod:item/arm_uplink_holo_small_raise_2",
+                    "tints": [
+                      {
+                        "type": "lasermod:arm_screen"
+                      },
+                      {
+                        "type": "lasermod:arm_led"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "threshold": 0.75,
+              "model": {
+                "type": "minecraft:composite",
+                "models": [
+                  {
+                    "type": "minecraft:model",
+                    "model": "lasermod:item/arm_uplink_raise_3",
+                    "tints": [
+                      {
+                        "type": "lasermod:arm_screen"
+                      },
+                      {
+                        "type": "lasermod:arm_led"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "minecraft:model",
+                    "model": "lasermod:item/arm_uplink_holo_raise_3",
+                    "tints": [
+                      {
+                        "type": "lasermod:arm_screen"
+                      },
+                      {
+                        "type": "lasermod:arm_led"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     ],
     "fallback": {
       "type": "minecraft:model",
-      "model": "lasermod:item/arm_piece_first"
+      "model": "lasermod:item/arm_uplink",
+      "tints": [
+        {
+          "type": "lasermod:arm_screen"
+        },
+        {
+          "type": "lasermod:arm_led"
+        }
+      ]
     }
   }
 }
